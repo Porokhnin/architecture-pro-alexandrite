@@ -1,0 +1,45 @@
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - 4317:4317 # OpenTelemetry Protocol (OTLP) over gRPC
+      - 4318:4318 # OpenTelemetry Protocol (OTLP) over HTTP
+      - 16686:16686 # UI port
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - tracing-network
+
+  service-a:
+    build:
+      context: ./services/service-a
+      dockerfile: Dockerfile
+    container_name: service-a
+    ports:
+      - "5001:8080"
+    environment:
+      - OTLP_URL=http://jaeger:4317
+      - SERVICE_B_URL=http://service-b:8080
+    depends_on:
+      - jaeger
+    networks:
+      - tracing-network
+
+  service-b:
+    build:
+      context: ./services/service-b
+      dockerfile: Dockerfile
+    container_name: service-b
+    ports:
+      - "5002:8080"
+    environment:
+      - OTLP_URL=http://jaeger:4317
+    depends_on:
+      - jaeger
+    networks:
+      - tracing-network
+
+networks:
+  tracing-network:
+    driver: bridge

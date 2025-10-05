@@ -1,0 +1,27 @@
+https://img.plantuml.biz/plantuml/png/dL6x3i8m3Dpz5Va1Ve015OeOaM1XTbEZHgGF9Sx0t-CqRTeAiP0XyfrFToUvy8oEGsi1DVTEfNTSpUXLyEHW49tHPi2ErSNr7LDNJ_jdX1l12VLhsaT19H1gPApGK-HAr0qj0Jh2ZU2ycaLGLm2nXTeTKfhQgriWzuQ4X8uPcHs1aAEni6L3GgGOGCjJWSOm9CbYS2SVB6U7EMsYSzpO9jD0LhecqzPu_-Lw3TPcpxhAHMNy6JsNVpZ3fDm_lUG6KCWN3_m1@startuml
+
+@startuml
+actor       Actor       as user
+participant Frontend    as front
+participant Backend     as back
+database    Cache       as cache
+database    Database    as db
+
+user -> front : Query
+front -> back : Query
+back -> cache : Check cache
+
+alt Cache hit
+cache -> back : Result
+back -> front : Result
+front -> user : Result
+
+else Cache miss
+cache -> back : Null
+back -> db : Query
+db -> back : Result
+back -> cache : Write result
+back -> front : Result
+front -> user : Result
+end
+@enduml
