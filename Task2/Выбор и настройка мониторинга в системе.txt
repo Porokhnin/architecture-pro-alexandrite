@@ -1,0 +1,80 @@
+Мотивация
+Компания уже потеряла несколько крупных контрактов из-за проблем с заказами. Недовольство пользователей растет. Если бы в системе уже был мониторинг, то можно было бы заранее подготовиться к возросшей нагрузке и мониторить ошибки в системе, тогда всех сопутствующих проблем бы не возникло. 
+Внедрение мониторинга позволит:
+- быстрее решать проблемы и повышать надежность
+- повысить удовлетворенность пользователей
+- повысить быстродействие системы и распределить ресурсы
+Что для компании Александрит является приоритетом №1 на данном этапе развития бизнеса.
+
+
+Выбор подхода к мониторингу
+Shop API		- Четыре золотых сигнала. Метод золотых сигналов в целом подойдёт любой системе, которая связана с предоставлением API
+Shop DB			- RED
+CRM API 		- Четыре золотых сигнала. Метод золотых сигналов в целом подойдёт любой системе, которая связана с предоставлением API
+MES API 		- Четыре золотых сигнала. Метод золотых сигналов в целом подойдёт любой системе, которая связана с предоставлением API
+MES DB 			- RED
+Messages Queue	- RED
+S3 storage		- RED
+
+Метрики:
+
+Shop API:
+	Системные:
+		CPU % for shop API
+		Memory Utilisation for shop API
+	Производительность:
+		Number of requests (RPS) for internet shop API
+		Response time (latency) for shop API
+		Number of HTTP 200 for shop API
+		Number of HTTP 500 for shop API
+		Number of simultanious sessions for shop API
+		
+Shop DB
+	Системные:
+		Memory Utilisation for shop db instance
+		Size of shop db instance
+	Производительность:
+		Number of connections for shop db instance
+		Number of errors
+		Duration of requests
+		
+CRM API
+	Системные:
+		CPU % for CRM API
+		Memory Utilisation for CRM API
+	Производительность:
+		Number of requests (RPS) for CRM API
+		Response time (latency) for CRM API
+		Number of HTTP 200 for CRM API
+		Number of HTTP 500 for CRM API
+		Number of simultanious sessions for CRM API
+		
+MES API
+	Системные:
+		CPU % for MES API
+		Memory Utilisation for MES API
+	Производительность:
+		Number of requests (RPS) for MES API
+		Response time (latency) for MES API
+		Number of HTTP 200 for MES API
+		Number of HTTP 500 for MES API
+		Number of simultanious sessions for MES API
+		
+MES DB
+	Системные:
+		Memory Utilisation for MES db instance
+		Size of MES db instance
+	Производительность:
+		Number of connections for MES db instance
+		Number of errors
+		Duration of requests
+	
+Messages Queue:
+	Number of dead-letter-exchange letters in RabbitMQ
+	Number of message in flight in RabbitMQ
+
+S3 storage
+	Системные:
+		Size of S3 storage
+	Производительность:
+		Number of connections

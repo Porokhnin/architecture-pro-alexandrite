@@ -1,0 +1,6 @@
+@service_a_HostAddress = http://localhost:5001
+
+GET {{service_a_HostAddress}}/tracing/
+Accept: application/json
+
+###
